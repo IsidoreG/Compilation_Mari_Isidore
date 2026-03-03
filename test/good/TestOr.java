@@ -6,7 +6,7 @@ class TestOr{
             System.out.println(1);
         }
         else{
-           System.out.println(0);
+            System.out.println(0);
         }
 
         // if(true || false){
