@@ -166,12 +166,12 @@ and typecheck_expression (cenv : class_env) (venv : variable_env) (vinit : S.t)
       let e' = typecheck_expression_expecting cenv venv vinit instanceof expected e in
       mke (TMJ.EUnOp (op, e')) returned
 
-  | EBinOp (op, e1, e2) ->
+  | EBinOp (OpEquals,e1,e2) ->
     let e1' = typecheck_expression cenv venv vinit instanceof e1 in
     let e2' = typecheck_expression cenv venv vinit instanceof e2 in 
-    match e1' with
-    | e2' ->  mke (TMJ.EBinOp (op, e1', e2')) returned
-    |_ -> error liazefchnvnui'"hvg_uir"
+    if e1'.typ <> e2'.typ then error e1 ("Not able to check equality"); (** Je sais pas si c'est vraiment ça a checker**)
+    mke (TMJ.EBinOp (OpEquals,e1',e2')) TypBool
+    
 
   | EBinOp (op, e1, e2) ->
       let expected, returned =

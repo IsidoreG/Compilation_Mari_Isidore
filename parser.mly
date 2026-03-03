@@ -151,6 +151,7 @@ raw_expression:
 | GT    { OpGt }
 | AND   { OpAnd }
 | OR    { OpOr }
+| EQUALS {OpEquals}
 
 instruction:
 | b = block
