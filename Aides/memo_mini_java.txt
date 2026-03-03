@@ -1,0 +1,50 @@
+LMJ.mli : arbre syntaxique abstrait (pour dire où il y a une erreur)
+TMJ.mli :faire tout pareil
+
+parser.mly (génère l'arbre syntaxique abstrait): parser syntaxique (dans parser token, ajouter un token) 
+en dessous de token c'est les prioritées
+
+lexer.mll : expr reg {unité lexicale} (unité lexical définie dans le parser.ml)
+
+typechecking.ml
+
+mj2C.ml
+
+Pour test : test/test.sh -a
+rajouter dans test/good
+
+pour le sucre syntaxique : tout faire dans le parser
+
+Pourquoi pas a faire:
+^ ou exclusif (bit a bit ?)
+/ division entière
+&
+|
+
+== egal (sur entier pour l'instant)
+!=
+if sans else
+for do..while
+
+return 
+break
+continue
+
+main avec plusieur instrcution
+
+int a=42;
+
+float 
+string
+
+interface
+surcharge
+lambda
+
+Fait :
+> greater than
+|| or
+== equals (ajouter la converstion en float, ajout de truc pour string)
+
+
+A demander : %left, %nonassoc comment ajouter plus d'inscription
