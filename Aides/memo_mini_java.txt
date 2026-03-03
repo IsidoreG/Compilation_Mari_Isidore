@@ -10,27 +10,28 @@ typechecking.ml
 
 mj2C.ml
 
-Pour test : test/test.sh -a
+Pour test : 
+    > make
+    > test/test.sh -a
 rajouter dans test/good
 
 pour le sucre syntaxique : tout faire dans le parser
 
 Pourquoi pas a faire:
-^ ou exclusif (bit a bit ?)
-/ division entière
 &
 |
 
 == egal (sur entier pour l'instant)
 !=
 if sans else
-for do..while
+for 
+do..while
 
 return 
 break
 continue
 
-main avec plusieur instrcution
+main avec plusieurs instruction
 
 int a=42;
 
@@ -44,7 +45,9 @@ lambda
 Fait :
 > greater than
 || or
+^ ou exclusif/xor 
 == equals (ajouter la converstion en float, ajout de truc pour string)
+/ division (ajouter la conversion en float)
 
 
 A demander : %left, %nonassoc comment ajouter plus d'inscription
