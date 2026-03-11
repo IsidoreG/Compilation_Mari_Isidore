@@ -21,7 +21,6 @@ Pourquoi pas a faire:
 &
 |
 
-== egal (sur entier pour l'instant)
 !=
 if sans else
 for 
@@ -48,6 +47,8 @@ Fait :
 ^ ou exclusif/xor 
 == equals (ajouter la converstion en float, ajout de truc pour string)
 / division (ajouter la conversion en float)
+& bitand
+| bitor
 
 
 A demander : %left, %nonassoc comment ajouter plus d'inscription

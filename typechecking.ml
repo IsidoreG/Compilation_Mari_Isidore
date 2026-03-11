@@ -166,23 +166,35 @@ and typecheck_expression (cenv : class_env) (venv : variable_env) (vinit : S.t)
       let e' = typecheck_expression_expecting cenv venv vinit instanceof expected e in
       mke (TMJ.EUnOp (op, e')) returned
 
-<<<<<<< HEAD
-  | EBinOp (OpEquals,e1,e2) ->
-    let e1' = typecheck_expression cenv venv vinit instanceof e1 in
-    let e2' = typecheck_expression cenv venv vinit instanceof e2 in 
-    if e1'.typ <> e2'.typ then error e1 ("Not able to check equality"); (** Je sais pas si c'est vraiment ça a checker**)
-    mke (TMJ.EBinOp (OpEquals,e1',e2')) TypBool
-    
-
-=======
-  | EBinOp(OpXor,e1,e2)->
+  | EBinOp (OpEquals, e1, e2) ->
       let e1' = typecheck_expression cenv venv vinit instanceof e1 in
-      let e2' =  typecheck_expression cenv venv vinit instanceof e2 in
+      let e2' = typecheck_expression cenv venv vinit instanceof e2 in 
+      if e1'.typ <> e2'.typ then 
+        error e1 ("Not able to check equality"); (** Je sais pas si c'est vraiment ça a checker**)
+      mke (TMJ.EBinOp (OpEquals,e1',e2')) TypBool
+    
+  | EBinOp (OpXor, e1, e2) ->
+      let e1' = typecheck_expression cenv venv vinit instanceof e1 in
+      let e2' = typecheck_expression cenv venv vinit instanceof e2 in
       if e1'.typ <> e2'.typ then
         error  e1 ("Erreur de type sur le XOR");
-      mke (TMJ.EBinOp (OpXor, e1', e2')) (type_tmj_to_lmj (Location.startpos e1) (Location.endpos e1) e1'.typ) 
+      mke (TMJ.EBinOp (OpXor, e1', e2')) (type_tmj_to_lmj (Location.startpos e1) (Location.endpos e1) e1'.typ)
   
->>>>>>> 84930f8 (xor et div)
+  | EBinOp (OpBitAnd, e1, e2) ->
+      let e1' = typecheck_expression cenv venv vinit instanceof e1 in
+      let e2' = typecheck_expression cenv venv vinit instanceof e2 in
+      if e1'.typ <> e2'.typ then
+        error  e1 ("Erreur de type sur le BITAND");
+      mke (TMJ.EBinOp (OpBitAnd, e1', e2')) (type_tmj_to_lmj (Location.startpos e1) (Location.endpos e1) e1'.typ)
+
+  | EBinOp (OpBitOr, e1, e2) ->
+      let e1' = typecheck_expression cenv venv vinit instanceof e1 in
+      let e2' = typecheck_expression cenv venv vinit instanceof e2 in
+      if e1'.typ <> e2'.typ then
+        error  e1 ("Erreur de type sur le BITOR");
+      mke (TMJ.EBinOp (OpBitOr, e1', e2')) (type_tmj_to_lmj (Location.startpos e1) (Location.endpos e1) e1'.typ)
+
+  
   | EBinOp (op, e1, e2) ->
       let expected, returned =
         match op with
