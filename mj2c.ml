@@ -647,8 +647,8 @@ let program2c out (p : TMJ.program) : unit =
 
     (indent indentation print_string) "tgc_start(&gc, &argc);"
 
-    (indent indentation (instr2c "main" (get_class_info p.name)))
-    p.main
+    (sep_list nl (indent indentation (instr2c "main" (get_class_info p.name)))) p.main
+
 
     (indent indentation print_string) "tgc_stop(&gc);"
 

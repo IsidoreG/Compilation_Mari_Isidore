@@ -65,5 +65,5 @@ and program = {
     name: identifier;
     defs: (identifier * clas) list;
     main_args: identifier;
-    main: instruction
+    main: instruction list
   }

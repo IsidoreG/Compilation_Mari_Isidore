@@ -467,10 +467,17 @@ let typecheck_program (p : program) : TMJ.program =
     List.map (typecheck_class cenv instanceof) p.defs
   in
   let venv = SM.singleton "this" (Typ p.name) in
+  let instructions, vinit = 
+    List.fold_left
+      (fun (acc,vinit) inst ->
+      let inst,vinit = typecheck_instruction cenv venv vinit instanceof inst in
+      (inst :: acc,vinit))
+    ([],S.empty)
+    p.main
+  in
   TMJ.{
     name = Location.content p.name;
     defs = defs';
     main_args = Location.content p.main_args;
-    main      = fst (typecheck_instruction cenv venv S.empty instanceof p.main)
+    main      = List.rev instructions
   }
-  

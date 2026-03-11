@@ -77,7 +77,6 @@ rule get_token = parse
   | "//" [^ '\n']* eof
   | eof     { EOF }
   | _ as c  { raise (Error ("Illegal character: " ^ String.make 1 c)) }
-
 and comment = parse
   | "*/"    { get_token lexbuf }
   | '\n'    { newline lexbuf; comment lexbuf }

@@ -30,21 +30,20 @@ return
 break
 continue
 
-main avec plusieur instrcution
-
 int a=42;
 
 float 
-string
+string (attention au caractère \, dans le lexer)
 
 interface
 surcharge
 lambda
 
+Idées autres:
+Nombre binaires ou hexa
+
 Fait :
 > greater than
 || or
 == equals (ajouter la converstion en float, ajout de truc pour string)
-
-
-A demander : %left, %nonassoc comment ajouter plus d'inscription
+main avec plusieur instrcution

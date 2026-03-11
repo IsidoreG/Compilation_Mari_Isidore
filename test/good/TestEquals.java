@@ -9,5 +9,12 @@ class TestOr{
             System.out.println(0);
         }
 
+        if(13 == 12){
+            System.out.println(0);
+        }
+        else{
+            System.out.println(1);
+        }
+
     }
 }
