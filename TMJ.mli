@@ -42,6 +42,7 @@ and instruction =
   | IIfWithoutElse of expression * instruction
   | IIf of expression * instruction * instruction
   | IWhile of expression * instruction
+  | IFor of instruction * expression * instruction * instruction
   | ISyso of expression
   | ISetVar of identifier * typ * expression
   | IArraySet of identifier * expression * expression

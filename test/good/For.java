@@ -1,4 +1,4 @@
-class Factorial {
+class For {
     public static void main(String[] a) {
         {
             System.out.println(new Fac().computeFac(10));
