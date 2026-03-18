@@ -18,10 +18,9 @@ rajouter dans test/good
 pour le sucre syntaxique : tout faire dans le parser
 
 Pourquoi pas a faire:
-&
-|
 
 !=
+
 if sans else
 for 
 do..while
