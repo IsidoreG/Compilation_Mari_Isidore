@@ -176,6 +176,9 @@ instruction:
 | IF LPAREN c = expression RPAREN i1 = instruction ELSE i2 = instruction
    { IIf (c, i1, i2) }
 
+| IF LPAREN c = expression RPAREN i1 = instruction
+   { IIfWithoutElse (c, i1) }
+
 | WHILE LPAREN c = expression RPAREN i = instruction
    { IWhile (c, i) }
 

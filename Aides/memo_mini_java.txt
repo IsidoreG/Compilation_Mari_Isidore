@@ -21,8 +21,9 @@ Pourquoi pas a faire:
 &
 |
 
+if(true)
+
 !=
-if sans else
 for 
 do..while
 
@@ -51,3 +52,4 @@ Fait :
 & bitand
 | bitor
 main avec plusieur instrcution
+if sans else

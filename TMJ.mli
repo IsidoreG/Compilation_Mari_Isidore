@@ -39,6 +39,7 @@ and unop = LMJ.unop = UOpNot
 
 and instruction =
   | IBlock of instruction list
+  | IIfWithoutElse of expression * instruction
   | IIf of expression * instruction * instruction
   | IWhile of expression * instruction
   | ISyso of expression

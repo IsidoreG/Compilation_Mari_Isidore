@@ -461,6 +461,11 @@ let instr2c
          (expr2c method_name class_info) ei
          (expr2c method_name class_info) ev
 
+    | IIfWithoutElse (c, i1) ->
+      fprintf out "if (%a) %a"
+        (expr2c method_name class_info) c
+        instr2c i1
+        
     | IIf (c, i1, i2) ->
        fprintf out "if (%a) %a%telse %a"
          (expr2c method_name class_info) c
