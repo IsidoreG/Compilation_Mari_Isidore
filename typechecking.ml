@@ -234,13 +234,15 @@ and typecheck_expression (cenv : class_env) (venv : variable_env) (vinit : S.t)
       clookup id cenv |> ignore;
       mke (TMJ.EObjectAlloc (Location.content id)) (Typ id)
 
-(** [typecheck_instruction cenv venv vinit instanceof inst] checks, using the environments [cenv] and
+(** [typecheck_instruction cenv venv vinit instanceof inst is_in_loop] checks, using the environments [cenv] and
     [venv], the set of initialized variables [vinit] and the [instanceof] function,
     that the instruction [inst] is well typed.
+    [is_in_loop] indicates if the instruction is in a loop
     If [typecheck_instruction] succeeds, the new set of initialized variables is returned. *)
 let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : S.t)
     (instanceof : identifier -> identifier -> bool)
-    (inst : instruction) : (TMJ.instruction * S.t) =
+    (inst : instruction)
+    (is_in_loop: bool) : (TMJ.instruction * S.t) =
   match inst with
   | ISetVar (v, e) ->
       let vinit =
@@ -262,7 +264,7 @@ let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : 
       let instructions', vinit =
         List.fold_left
           (fun (acc, vinit) inst ->
-          let inst, vinit = typecheck_instruction cenv venv vinit instanceof inst in
+          let inst, vinit = typecheck_instruction cenv venv vinit instanceof inst is_in_loop in
           (inst :: acc, vinit))
         ([], vinit)
         instructions
@@ -272,33 +274,34 @@ let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : 
     | IIfWithoutElse (cond, ithen) ->
         let cond' = typecheck_expression_expecting cenv venv vinit instanceof TypBool cond in
         let ithen', vinit1 =
-          typecheck_instruction cenv venv vinit instanceof ithen
+          typecheck_instruction cenv venv vinit instanceof ithen is_in_loop
         in
         (TMJ.IIfWithoutElse (cond', ithen'),vinit1)
-        
+
   | IIf (cond, ithen, ielse) ->
       let cond' = typecheck_expression_expecting cenv venv vinit instanceof TypBool cond in
       let ithen', vinit1 =
-        typecheck_instruction cenv venv vinit instanceof ithen
+        typecheck_instruction cenv venv vinit instanceof ithen is_in_loop
       in
       let ielse', vinit2 =
-        typecheck_instruction cenv venv vinit instanceof ielse
+        typecheck_instruction cenv venv vinit instanceof ielse is_in_loop
       in
       (TMJ.IIf (cond', ithen', ielse'), S.inter vinit1 vinit2)
 
   | IWhile (cond, ibody) ->
       let cond' = typecheck_expression_expecting cenv venv vinit instanceof TypBool cond in
-      let ibody', vinit = typecheck_instruction cenv venv vinit instanceof ibody in
+      let ibody', vinit = typecheck_instruction cenv venv vinit instanceof ibody true in
       (TMJ.IWhile (cond', ibody'), vinit)
-
-  | IFor (cond, ibody) ->
-      let cond' = typecheck_expression_expecting cenv venv vinit instanceof TypBool cond in
-      let ibody', vinit = typecheck_instruction cenv venv vinit instanceof ibody in
-      (TMJ.IFor (ibody', cond', ibody', ibody'), vinit)
 
   | ISyso e ->
      let e' = typecheck_expression_expecting cenv venv vinit instanceof TypInt e in
      (TMJ.ISyso e', vinit)
+
+  | IBreak ->
+      if not is_in_loop then
+        raise (Error "Break keyword should always be in a loop");
+      (TMJ.IBreak,vinit)
+        
 
 (** [occurences x bindings] returns the elements in [bindings] that have [x] has identifier. *)
 let occurrences (x : string) (bindings : (identifier * 'a) list) : identifier list =
@@ -356,7 +359,7 @@ let typecheck_method (cenv : class_env) (venv : variable_env)
     S.diff (SM.domain venv) (SM.domain mlocals)
   in
   let body', vinit =
-    match typecheck_instruction cenv venv vinit instanceof (IBlock m.body) with 
+    match typecheck_instruction cenv venv vinit instanceof (IBlock m.body) false with 
     | IBlock body', vinit -> body', vinit 
     | _ -> assert false
   in
@@ -505,7 +508,7 @@ let typecheck_program (p : program) : TMJ.program =
   let instructions, vinit = 
     List.fold_left
       (fun (acc,vinit) inst ->
-      let inst,vinit = typecheck_instruction cenv venv vinit instanceof inst in
+      let inst,vinit = typecheck_instruction cenv venv vinit instanceof inst false in
       (inst :: acc,vinit))
     ([],S.empty)
     p.main

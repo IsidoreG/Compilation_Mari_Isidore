@@ -15,6 +15,7 @@
 %token THIS NEW DOT LENGTH
 %token SYSO
 %token IF ELSE WHILE FOR
+%token BREAK
 %token EOF
 
 %left OR
@@ -184,6 +185,9 @@ instruction:
 
 | FOR LPAREN c = expression RPAREN i = instruction
    { IFor (i, c, i, i) }
+
+| BREAK SEMICOLON
+   { IBreak }
 
 block:
 | LBRACE is = list(instruction) RBRACE

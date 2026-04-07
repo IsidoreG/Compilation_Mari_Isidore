@@ -28,7 +28,6 @@ for
 do..while
 
 return 
-break
 continue
 
 int a=42;
@@ -53,3 +52,4 @@ Fait :
 | bitor
 main avec plusieur instrcution
 if sans else
+break (seul soucis : l'erreur n'indique aucune info de position)

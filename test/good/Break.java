@@ -1,8 +1,10 @@
-class while {
+class Break {
     public static void main(String[] args) {
         // Boolean expected
-        while (1) {
-            System.out.println(1);
+        while (true) {
+            break;
         }
+        System.out.println(1);
+
     }
 }
