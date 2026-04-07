@@ -41,6 +41,8 @@ lambda
 
 Idées autres:
 Nombre binaires ou hexa
+++ 
+--
 
 Fait :
 > greater than

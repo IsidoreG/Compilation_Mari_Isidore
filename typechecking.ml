@@ -293,6 +293,18 @@ let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : 
       let ibody', vinit = typecheck_instruction cenv venv vinit instanceof ibody true in
       (TMJ.IWhile (cond', ibody'), vinit)
 
+  | IFor (id1, expr1, cond, id2, expr2, ibody) ->
+      let cond' = typecheck_expression_expecting cenv venv vinit instanceof TypBool cond in
+      let ibody', vinit = typecheck_instruction cenv venv vinit instanceof ibody in
+      let vinit = S.add (Location.content id1) vinit in
+      let typ1 = vlookup id1 venv in
+      let typ2 = vlookup id2 venv in
+      if typ1 <> TypInt && typ2 <> TypInt then
+        error  id1 ("Erreur de type");
+      let expr1' = typecheck_expression_expecting cenv venv vinit instanceof TypInt expr1 in
+      let expr2' = typecheck_expression_expecting cenv venv vinit instanceof TypInt expr2 in
+      (TMJ.IFor (Location.content id1, expr1', cond', Location.content id2, expr2', ibody'), vinit)
+
   | ISyso e ->
      let e' = typecheck_expression_expecting cenv venv vinit instanceof TypInt e in
      (TMJ.ISyso e', vinit)

@@ -47,7 +47,7 @@ and instruction =
   | IIfWithoutElse of expression * instruction(** [IIf (e, i1)] represents the instruction [if (e) i1 ]. *)
   | IIf of expression * instruction * instruction (** [IIf (e, i1, i2)] represents the instruction [if (e) i1 else i2]. *)
   | IWhile of expression * instruction (** [IWhile (e, ins)] represents the instruction [while (e) ins]. *)
-  | IFor of instruction * expression * instruction * instruction (** [IFor (e, ins)] represents the instruction [for (e) ins]. *)
+  | IFor of identifier * expression * expression * identifier * expression * instruction (** [IFor (ins, e, ins, ins)] represents the instruction [for (ins, e, ins) ins]. *)
   | ISyso of expression (** [ISyso e] represents the instruction [System.out.println(e);]. *)
   | ISetVar of identifier * expression (** [ISetVar (id, e)] represents the instruction [id = e;]. *)
   | IArraySet of identifier * expression * expression (** [IArraySet (id, e1, e2)] represents the instruction [id[e1] = e2;]. *)
