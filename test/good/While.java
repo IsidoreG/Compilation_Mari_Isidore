@@ -1,17 +1,18 @@
-class For {
+class While {
     public static void main(String[] args) {
-        System.out.println(new ForAux().f());
+        System.out.println(new WhileAux().w());
     }
 }
 
-class ForAux {
-    public int f(){
+class WhileAux {
+    public int w(){
         int i;
         int res;
         i = 0;
         res = 0;
-        for (i = 0; i < 10; i = i + 1) {
+        while (i < 10) {
             res = res + 2;
+            i = i + 1;
         }
         if (res == 20){
             System.out.println(1);
@@ -20,7 +21,4 @@ class ForAux {
         }
         return res;
     }
-
-
 }
-

@@ -1,18 +1,20 @@
-class For {
+class DoWhile {
     public static void main(String[] args) {
-        System.out.println(new ForAux().f());
+        System.out.println(new DoWhileAux().w());
     }
 }
 
-class ForAux {
-    public int f(){
+class DoWhileAux {
+    public int w(){
         int i;
         int res;
         i = 0;
         res = 0;
-        for (i = 0; i < 10; i = i + 1) {
+        do {
             res = res + 2;
-        }
+            i = i + 1;
+        } while(i < 10);
+        
         if (res == 20){
             System.out.println(1);
         }else{
@@ -20,7 +22,4 @@ class ForAux {
         }
         return res;
     }
-
-
 }
-
