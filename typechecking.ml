@@ -172,6 +172,13 @@ and typecheck_expression (cenv : class_env) (venv : variable_env) (vinit : S.t)
       if e1'.typ <> e2'.typ then 
         error e1 ("Not able to check equality"); (** Je sais pas si c'est vraiment ça a checker**)
       mke (TMJ.EBinOp (OpEquals,e1',e2')) TypBool
+
+  | EBinOp (OpNotEquals, e1, e2) ->
+      let e1' = typecheck_expression cenv venv vinit instanceof e1 in
+      let e2' = typecheck_expression cenv venv vinit instanceof e2 in 
+      if e1'.typ <> e2'.typ then 
+        error e1 ("Not able to check equality");
+      mke (TMJ.EBinOp (OpNotEquals,e1',e2')) TypBool
     
   | EBinOp (OpXor, e1, e2) ->
       let e1' = typecheck_expression cenv venv vinit instanceof e1 in
@@ -194,7 +201,6 @@ and typecheck_expression (cenv : class_env) (venv : variable_env) (vinit : S.t)
         error  e1 ("Erreur de type sur le BITOR");
       mke (TMJ.EBinOp (OpBitOr, e1', e2')) (type_tmj_to_lmj (Location.startpos e1) (Location.endpos e1) e1'.typ)
 
-  
   | EBinOp (op, e1, e2) ->
       let expected, returned =
         match op with

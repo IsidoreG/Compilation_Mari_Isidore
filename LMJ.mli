@@ -39,6 +39,8 @@ and binop =
   | OpBitOr  (** Binary operator [|]. *)
   | OpXor (** Binary operator [^]. *)
   | OpEquals (** Binary operator [==]. *)
+  | OpNotEquals (** Binary operator [!=]. *)
+
 
 and unop = UOpNot (** Unary operator [!]. *)
 
