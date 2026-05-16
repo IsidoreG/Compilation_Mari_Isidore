@@ -18,13 +18,8 @@ rajouter dans test/good
 pour le sucre syntaxique : tout faire dans le parser
 
 Pourquoi pas a faire:
-&
-|
-
-if(true)
 
 !=
-for 
 do..while
 
 return (verifier que on est bien dans une classe, verifier que ça renvois le bon type et verifier que il y a bien un return)
@@ -55,3 +50,4 @@ Fait :
 main avec plusieur instrcution
 if sans else
 break (seul soucis : l'erreur n'indique aucune info de position)
+for

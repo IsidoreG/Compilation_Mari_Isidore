@@ -297,6 +297,11 @@ let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : 
       let ibody', vinit = typecheck_instruction cenv venv vinit instanceof ibody true shouldReturn typeToReturn in
       (TMJ.IWhile (cond', ibody'), vinit)
 
+  | IDoWhile (ibody, cond) ->
+      let ibody', vinit = typecheck_instruction cenv venv vinit instanceof ibody in
+      let cond' = typecheck_expression_expecting cenv venv vinit instanceof TypBool cond in
+      (TMJ.IDoWhile (ibody', cond'), vinit)
+
   | IFor (id1, expr1, cond, id2, expr2, ibody) ->
       let cond' = typecheck_expression_expecting cenv venv vinit instanceof TypBool cond in
       let ibody', vinit = typecheck_instruction cenv venv vinit instanceof ibody is_in_loop shouldReturn typeToReturn in
