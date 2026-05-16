@@ -21,6 +21,7 @@ The construction of this transpiler is documented on [www.mrcoder.org](https://w
 - main avec plusieurs instructions
 - if sans else
 - for
+- do ... while
 
 ## Autres mots clefs
 
