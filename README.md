@@ -4,6 +4,31 @@
 to [C](https://en.wikipedia.org/wiki/C_%28programming_language%29).\
 The construction of this transpiler is documented on [www.mrcoder.org](https://www.mrcoder.org/en/compiler/minijava/).
 
+### Ce qu'on a implémenté
+
+## Opération binaires
+
+- ">" Plus grand que
+- "||" ou 
+- "^" xor
+- "==" egale
+- "/" division
+- "&" et bit à bit
+- "|" ou bit à bit
+
+## Structures
+
+- main avec plusieurs instructions
+- if sans else
+- for
+
+## Autres mots clefs
+
+- break *Seul soucis, l'erreur si le break n'est pas dans une boucle ne renvois pas d'information de position*
+- return *Par manque de temps, aucunes vérifications sur la présence effective d'un return dans une fonction  n'a été faite*
+
+
+
 ### Install Dependencies
 
 #### Linux (Ubuntu)

@@ -22,7 +22,6 @@ Pourquoi pas a faire:
 !=
 do..while
 
-return (verifier que on est bien dans une classe, verifier que ça renvois le bon type et verifier que il y a bien un return)
 continue
 
 int a=42;
@@ -51,3 +50,4 @@ main avec plusieur instrcution
 if sans else
 break (seul soucis : l'erreur n'indique aucune info de position)
 for
+return (il manque juste la vérification de présence)
