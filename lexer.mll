@@ -72,6 +72,7 @@ rule get_token = parse
   | "do"    { DO }
   | "for"   { FOR }
   | "break" { BREAK }
+  | "return" { RETURN }
   | integer as i
       {
         try

@@ -49,6 +49,7 @@ and instruction =
   | ISetVar of identifier * typ * expression
   | IArraySet of identifier * expression * expression
   | IBreak
+  | IReturn of expression
 
 and typ =
   | TypInt
@@ -61,7 +62,6 @@ and metho = {
     result: typ;
     locals: (identifier * typ) list;
     body: instruction list;
-    return: expression
   }
 
 and clas = {
