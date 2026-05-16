@@ -84,7 +84,6 @@ metho:
    RPAREN
    LBRACE
    ds = declarations_and_statements
-   RETURN e = expression SEMICOLON
    RBRACE
    {
      let d, s = fst ds, snd ds in
@@ -94,7 +93,6 @@ metho:
        result  = t;
        locals  = d;
        body    = s;
-       return  = e;
      }
    }
 
@@ -188,6 +186,9 @@ instruction:
 
 | BREAK SEMICOLON
    { IBreak }
+
+| RETURN e = expression SEMICOLON
+   { IReturn e }
 
 block:
 | LBRACE is = list(instruction) RBRACE

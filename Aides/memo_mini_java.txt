@@ -27,7 +27,7 @@ if(true)
 for 
 do..while
 
-return 
+return (verifier que on est bien dans une classe, verifier que ça renvois le bon type et verifier que il y a bien un return)
 continue
 
 int a=42;
@@ -36,7 +36,7 @@ float
 string (attention au caractère \, dans le lexer)
 
 interface
-surcharge
+surcharge (juste changer le nom de la méthode en ajoutant les types)
 lambda
 
 Idées autres:
